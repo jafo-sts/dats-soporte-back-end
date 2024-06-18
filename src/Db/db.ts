@@ -9,6 +9,7 @@ const cached: {
 
 
 const connectMongo= async()=>{
+
     if(!MONGODB_URI)
         throw new Error("Not Uri")
     if(cached.connection)
