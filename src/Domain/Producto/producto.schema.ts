@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ProductoSchema = new mongoose.Schema(
+const TicketSchema = new mongoose.Schema(
     {
         Nombre: {
             type: String,
@@ -17,4 +17,4 @@ const ProductoSchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model('Producto', ProductoSchema)
+export default mongoose.model('Ticket', TicketSchema)
