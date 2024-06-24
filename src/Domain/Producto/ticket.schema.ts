@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const productoSchema = new mongoose.Schema(
+const Ticketschema = new mongoose.Schema(
     {
         Nombre: {
             type: String,
@@ -10,11 +10,10 @@ const productoSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        Costo: {
-            type: Number,
-            required: true
-        }
+    },
+    {
+        timestamps: true
     }
 )
 
-export default mongoose.model('producto', productoSchema)
+export default mongoose.model('Ticket', Ticketschema)
