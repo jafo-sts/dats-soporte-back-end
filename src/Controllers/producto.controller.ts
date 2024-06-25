@@ -9,7 +9,7 @@ export const GetProductos = async (req: Request, res: Response) => {
 
 export const PostTickets = async (req: Request, res: Response) => {
     try { 
-      const tickets = req.body.Ticket;
+      const tickets = new ticketSchema(req.body);
       const responseTickets = await CtrlProducto.PostTickets(tickets);
       return res.status(201).json(responseTickets);
     } catch (error) {
