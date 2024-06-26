@@ -1,5 +1,6 @@
+import { ServerResponseDto } from "../../../Domain/ServerResponse/serverresponse.dto"
+import { TicketModel } from "../../../Domain/Ticket/ticket.model"
 import ticketSchema from "../../../Domain/Ticket/ticket.schema"
-import { ServerReponseDto } from "../Domain/ServerResponse/ServerResponseDto"
 import { TicketDTO } from "../Domain/ticket.dto"
 import * as TicketRepository from '../Infrastructure/ticket.repository'
 
@@ -8,5 +9,15 @@ export const getTickets = async () => {
 }
 
 export const postTickets = async (ticket: TicketDTO) => {
-    return await TicketRepository.postTickets(ticket)
+    const response = await TicketRepository.postTickets(ticket)
+    if(response)
+        return {
+            message: "Ticket Agregado Correctamente",
+            succeeded: true
+        } as ServerResponseDto
+    else
+        return {
+            message: "Se ha presentado un problema agregando el ticket",
+            succeeded: false
+        } as ServerResponseDto
 };
