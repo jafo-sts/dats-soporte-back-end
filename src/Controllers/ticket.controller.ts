@@ -12,5 +12,7 @@ export const postTickets = async (req: Request, res: Response) => {
     const responseAdd = await TicketService.postTickets(ticket)
 
     if(responseAdd)
-      return res.status(200).json(responseAdd)
+        return res.status(200).json(responseAdd)
+    else
+        return res.status(400).json(responseAdd)
 }
