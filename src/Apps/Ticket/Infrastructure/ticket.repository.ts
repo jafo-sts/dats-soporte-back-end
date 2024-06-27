@@ -8,7 +8,9 @@ export const getProducts = async () => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
-      return await Ticket.find()
+      return await Ticket.find({
+        isDelete: false
+      })
     return null
   } catch (error) {
     return []
@@ -22,9 +24,9 @@ export const postTickets = async (ticket: TicketDTO) => {
       const responseAdd = new ticketSchema({
         descripcion: ticket.descripcion,
         status: [
-          { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", estado: "CRE",mensaje: "",fecha: DatesRepository.DateTimeNowUtc() }
+          { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", estado: "CRE", mensaje: "", fecha: DatesRepository.DateTimeNowUtc() }
         ],
-        historial:[
+        historial: [
           { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", movimiento: "CREA", mensaje: "", fecha: DatesRepository.DateTimeNowUtc() }
 
         ]
