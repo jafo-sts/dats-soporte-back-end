@@ -1,12 +1,12 @@
 import express, {Express} from 'express'
 import cors from 'cors'
-import Producto from './Routes/producto.route'
+import Ticket from './Routes/ticket.route'
 
 
 const app: Express = express()
 
 app.use(cors())
 app.use(express.json())
-app.use('/api', Producto)
+app.use('/api', Ticket)
 
 export default app

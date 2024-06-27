@@ -1,11 +1,9 @@
 import connectMongo from "../../../Db/db";
-import Ticket from '../../../Domain/Producto/ticket.schema'
-
-export const GetProducts = async() => {
+import Ticket from '../../../Domain/Ticket/ticket.schema'
+import { TicketDTO } from "../Domain/ticket.dto"
+export const getProducts = async() => {
     try {
-
         const responseConnect = await connectMongo()
-        
         if(responseConnect)
             return await Ticket.find()
         return null
@@ -15,7 +13,7 @@ export const GetProducts = async() => {
     }
 }
 
-export const PostTickets = async (tickets: Array<{ Nombre: string, Descripcion: string }>) => {
+export const postTickets = async (tickets: TicketDTO) => {
   try {
     const responseConnect = await connectMongo();
 
