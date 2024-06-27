@@ -26,3 +26,17 @@ export const postTickets = async (ticket: TicketDTO) => {
             succeeded: false
         } as ServerResponseDto
 };
+
+export const SoftDeleteTicket = async(idTicket: string)=>{
+    const response = await TicketRepository.SoftDeleteTicket(idTicket)
+    if(response)
+        return {
+            message: "Ticket eliminado Correctamente",
+            succeeded: true
+        } as ServerResponseDto
+    else
+        return {
+            message: "Se ha presentado un problema eliminando el ticket",
+            succeeded: false
+        } as ServerResponseDto
+}

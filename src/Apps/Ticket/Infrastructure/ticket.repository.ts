@@ -50,3 +50,14 @@ export const postTickets = async (ticket: TicketDTO) => {
     return null;
   }
 }
+
+export const SoftDeleteTicket =async(idTicket: string)=>{
+  try {
+    const responseConnect = await connectMongo()
+    if (responseConnect)
+      return await Ticket.findByIdAndUpdate(idTicket, {isDelete: true})
+    return null
+  } catch (error) {
+    return []
+  }
+}

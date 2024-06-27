@@ -6,5 +6,6 @@ import * as TicketController from '../Controllers/ticket.controller'
 router.get('/ticket',  TicketController.getTickets)
 router.post('/ticket', TicketController.postTickets)
 router.get('/ticket/:uuidSearch',TicketController.GetTicketById)
+router.delete('/ticket/:uuidSearch',TicketController.SoftDeleteTicket)
 
 export default router
