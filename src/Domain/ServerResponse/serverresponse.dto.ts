@@ -1,4 +1,4 @@
-export interface ServerReponseDto {
+export interface ServerResponseDto{
     message: string,
     succeeded: boolean
 }
