@@ -16,7 +16,6 @@ export interface StatusDTO {
 }
 
 export interface TicketDTO {
-<<<<<<< HEAD
     descripcion: string;
     status: StatusDTO[];
     evidencias: EvidenciaDTO[];
@@ -25,13 +24,3 @@ export interface TicketDTO {
 
 
 
-=======
-    descripcion: String,
-}
-
-
-export interface TicketUpdateDto{
-    id: string,
-    descripcion: string
-}
->>>>>>> 500f7632631a13e2c48a65a38293f8c8997d5512
