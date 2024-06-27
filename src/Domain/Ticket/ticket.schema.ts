@@ -1,38 +1,65 @@
-import mongoose from "mongoose";
-import { ComentariosModel, EvidenciaModel, HistorialModel, StatusModel, TicketModel } from "./ticket.model";
+import mongoose from 'mongoose';
 
-const HistorialSchema = new mongoose.Schema<HistorialModel>({
-    idusuario: String,
-    movimiento: String,
-    mensaje: String,
-    fecha:Date
-})
-const ComentarioSchema = new mongoose.Schema<ComentariosModel>({
-    idusuario: String,
-    mensaje: String,
-    fecha: Date
-})
+const evidenciaSchema = new mongoose.Schema({
+    url: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,
+        required: true
+    }
+}, 
+{
+    _id: false,
+    timestamps: true
+});
 
-const EvidenciaSchema = new mongoose.Schema<EvidenciaModel>({
-    url: String,
-    descripcion: String,
-    fecha: Date
-})
+const comentariosSchema = new mongoose.Schema({
+    mensaje:{
+        type: String,
+        require: true
+    },
+    usuario: {
+        type: mongoose.Schema.ObjectId,
+        ref:'User',
+        require: true
+    }
+});
 
-const StatusSchema = new mongoose.Schema<StatusModel>({
-    idusuario: String,
-    estado: String,
-    mensaje: String,
-    fecha: Date
-})
+const statusShcema= new mongoose.Schema(
+    {
+        nombre: {
+            type: String,
+            enum: ['Creado','En Revision', 'Pendiente', 'Finalizado', 'Cerrado', 'Eliminado','Resuelto'],
+            require:true
+        },
+        code: {
+            type: String,
+            enum: ['CRE', 'REV', 'PEN', 'FIN', 'CER', 'DEL', 'RES'],
+            required: true
+        },
+});
 
-const TicketSchema = new mongoose.Schema<TicketModel>({
-    isDelete: {type: Boolean, default: false},
-    descripcion:{type: String, required: true},
-    status: [StatusSchema],
-    evidencia: [EvidenciaSchema],
-    comentarios: [ComentarioSchema],
-    historial: [HistorialSchema],
-})
+const ticketSchema = new mongoose.Schema({
+    descripcion: {
+        type: String,
+        required: true
+    },
+    status:{
+        type:[statusShcema],
+        required: true
+    },
+    evidencias: {
+        type: [evidenciaSchema],
+        required: true
+    },
+    comentarios: {
+        type: [comentariosSchema],
+        required: true
+    }
+});
 
-export default mongoose.model('Ticket', TicketSchema)
+
+
+export default mongoose.model('Ticket', ticketSchema);
