@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import * as TicketService from '../Apps/Ticket/Applications/ticket.service'
-import { TicketDTO } from "../Apps/Ticket/Domain/ticket.dto"
+import { TicketDTO, TicketUpdateDto } from "../Apps/Ticket/Domain/ticket.dto"
 
 export const getTickets = async (req: Request, res: Response) => {
     const responseTickets = await TicketService.getTickets()
@@ -26,5 +26,10 @@ export const SoftDeleteTicket= async(req: Request, res: Response)=>{
     const uuidSearch: string = String(req.params["uuidSearch"]) ?? ""
     const responseTickets = await TicketService.SoftDeleteTicket(uuidSearch)
     return res.status(200).json(responseTickets)
+}
 
+export const UpdateTicket = async(req: Request, res: Response)=>{
+    const updateTicket: TicketUpdateDto = req.body
+    const responseTickets = await TicketService.UpdateTicket(updateTicket)
+    return res.status(200).json(responseTickets)
 }

@@ -2,7 +2,7 @@ import connectMongo from "../../../Db/db";
 import ticketSchema from "../../../Domain/Ticket/ticket.schema";
 import Ticket from '../../../Domain/Ticket/ticket.schema'
 import * as DatesRepository from "../../../Infrastructure/DateFormat.repository";
-import { TicketDTO } from "../Domain/ticket.dto";
+import { TicketDTO, TicketUpdateDto } from "../Domain/ticket.dto";
 
 export const GetTickets = async () => {
   try {
@@ -56,6 +56,21 @@ export const SoftDeleteTicket =async(idTicket: string)=>{
     const responseConnect = await connectMongo()
     if (responseConnect)
       return await Ticket.findByIdAndUpdate(idTicket, {isDelete: true})
+    return null
+  } catch (error) {
+    return []
+  }
+}
+
+export const UpdateTicket=async(updateTicket: TicketUpdateDto)=>{
+  try {
+    const responseConnect = await connectMongo()
+    if (responseConnect)
+      return await Ticket.findByIdAndUpdate(updateTicket.id, {
+    descripcion: updateTicket.descripcion,
+    $push: {
+      historial: { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", movimiento: "Actualizacion", mensaje: "", fecha: DatesRepository.DateTimeNowUtc()}
+    }})
     return null
   } catch (error) {
     return []
