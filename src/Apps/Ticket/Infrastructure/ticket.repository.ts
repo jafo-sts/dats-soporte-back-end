@@ -4,13 +4,24 @@ import Ticket from '../../../Domain/Ticket/ticket.schema'
 import * as DatesRepository from "../../../Infrastructure/DateFormat.repository";
 import { TicketDTO } from "../Domain/ticket.dto";
 
-export const getProducts = async () => {
+export const GetTickets = async () => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
       return await Ticket.find({
         isDelete: false
       })
+    return null
+  } catch (error) {
+    return []
+  }
+}
+
+export const GetTicketById = async(idTicket: string)=>{
+  try {
+    const responseConnect = await connectMongo()
+    if (responseConnect)
+      return await Ticket.findById(idTicket)
     return null
   } catch (error) {
     return []

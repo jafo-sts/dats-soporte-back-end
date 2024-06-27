@@ -7,6 +7,11 @@ export const getTickets = async (req: Request, res: Response) => {
     return res.status(200).json(responseTickets)
 }
 
+export const GetTicketById = async (req: Request, res: Response) => {
+    const uuidSearch: string = String(req.params["uuidSearch"]) ?? ""
+    const responseTickets = await TicketService.GetTicketById(uuidSearch)
+    return res.status(200).json(responseTickets)
+}
 export const postTickets = async (req: Request, res: Response) => {
     const ticket: TicketDTO = req.body
     const responseAdd = await TicketService.postTickets(ticket)

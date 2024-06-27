@@ -5,7 +5,12 @@ import { TicketDTO } from "../Domain/ticket.dto"
 import * as TicketRepository from '../Infrastructure/ticket.repository'
 
 export const getTickets = async () => {
-    return await TicketRepository.getProducts()
+    return await TicketRepository.GetTickets()
+}
+
+export const GetTicketById=async(idTicket: string)=>{
+    const response = await TicketRepository.GetTicketById(idTicket)
+    return response
 }
 
 export const postTickets = async (ticket: TicketDTO) => {
