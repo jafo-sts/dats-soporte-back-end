@@ -22,7 +22,11 @@ export const postTickets = async (ticket: TicketDTO) => {
       const responseAdd = new ticketSchema({
         descripcion: ticket.descripcion,
         status: [
-          { nombre: "CRE", comentario: "", fecha: DatesRepository.DateTimeNowUtc() }
+          { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", estado: "CRE",mensaje: "",fecha: DatesRepository.DateTimeNowUtc() }
+        ],
+        historial:[
+          { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", movimiento: "CREA", mensaje: "", fecha: DatesRepository.DateTimeNowUtc() }
+
         ]
       })
       responseAdd.save()

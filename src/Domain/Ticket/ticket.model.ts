@@ -3,12 +3,14 @@ export interface TicketModel{
     status: Array<StatusModel>,
     evidencia: Array<EvidenciaModel>,
     comentarios: Array<ComentariosModel>,
-    softdelete: boolean
+    historial: Array<HistorialModel>,
+    isDelete: boolean
 }
 
 export interface StatusModel{
-    nombre: string,
-    comentario: string,
+    idusuario: string,
+    estado: string,
+    mensaje: string,
     fecha: Date,
 }
 
@@ -19,7 +21,14 @@ export interface EvidenciaModel{
 }
 
 export interface ComentariosModel{
-    usuario: string,
-    comentario: string,
+    idusuario: string,
+    mensaje: string,
+    fecha: Date
+}
+
+export interface HistorialModel{
+    idusuario: string,
+    movimiento: string,
+    mensaje: string,
     fecha: Date
 }
