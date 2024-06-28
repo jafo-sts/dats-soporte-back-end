@@ -8,16 +8,30 @@ export const GetTickets = async () => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
-      return await Ticket.find({
-        isDelete: false
-      })
+      return await Ticket.aggregate([
+        {
+          $match:{
+            'isDelete': false
+          }
+        },{
+          $project:{
+            descripcion: 1,
+            status:{
+              $arrayElemAt: ["$status", -1]
+            },
+            historial:{
+              $arrayElemAt: ["$historial", -1]
+            }
+          }
+        }])
     return null
   } catch (error) {
+    console.log(error)
     return []
   }
 }
 
-export const GetTicketById = async(idTicket: string)=>{
+export const GetTicketById = async (idTicket: string) => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
@@ -51,26 +65,27 @@ export const postTickets = async (ticket: TicketDTO) => {
   }
 }
 
-export const SoftDeleteTicket =async(idTicket: string)=>{
+export const SoftDeleteTicket = async (idTicket: string) => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
-      return await Ticket.findByIdAndUpdate(idTicket, {isDelete: true})
+      return await Ticket.findByIdAndUpdate(idTicket, { isDelete: true })
     return null
   } catch (error) {
     return []
   }
 }
 
-export const UpdateTicket=async(updateTicket: TicketUpdateDto)=>{
+export const UpdateTicket = async (updateTicket: TicketUpdateDto) => {
   try {
     const responseConnect = await connectMongo()
     if (responseConnect)
       return await Ticket.findByIdAndUpdate(updateTicket.id, {
-    descripcion: updateTicket.descripcion,
-    $push: {
-      historial: { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", movimiento: "Actualizacion", mensaje: "", fecha: DatesRepository.DateTimeNowUtc()}
-    }})
+        descripcion: updateTicket.descripcion,
+        $push: {
+          historial: { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", movimiento: "Actualizacion", mensaje: "", fecha: DatesRepository.DateTimeNowUtc() }
+        }
+      })
     return null
   } catch (error) {
     return []
