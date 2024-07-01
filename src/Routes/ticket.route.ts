@@ -9,4 +9,8 @@ router.put('/ticket', TicketController.UpdateTicket)
 router.get('/ticket/:uuidSearch',TicketController.GetTicketById)
 router.delete('/ticket/:uuidSearch',TicketController.SoftDeleteTicket)
 
+router.post('/ticket/comments', TicketController.AddComment)
+router.post('/ticket/evidencia', TicketController.AddEvidencia)
+router.post('/ticket/state', TicketController.UpdateState)
+
 export default router

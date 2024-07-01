@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-types": "openapi-typescript OpenApi/Spec.yml",
+    "generate-types": "openapi-typescript src/OpenApi/Spec.yml --output src/Types/api.ts",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start": "node dist/src/index.js"

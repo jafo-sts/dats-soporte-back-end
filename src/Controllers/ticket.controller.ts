@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import * as TicketService from '../Apps/Ticket/Applications/ticket.service'
-import { TicketDTO, TicketUpdateDto } from "../Apps/Ticket/Domain/ticket.dto"
+import { TicketAddCommentDto, TicketAddEvidenciaDto, TicketDTO, TicketUpdateDto, TicketUpdateStateDto } from "../Apps/Ticket/Domain/ticket.dto"
 
 export const getTickets = async (req: Request, res: Response) => {
     const responseTickets = await TicketService.getTickets()
@@ -32,4 +32,26 @@ export const UpdateTicket = async(req: Request, res: Response)=>{
     const updateTicket: TicketUpdateDto = req.body
     const responseTickets = await TicketService.UpdateTicket(updateTicket)
     return res.status(200).json(responseTickets)
+}
+
+export const AddComment = async(req: Request, res: Response)=>{
+    const updateTicket: TicketAddCommentDto = req.body
+    const responseTickets = await TicketService.AddComment(updateTicket)
+    if(responseTickets)
+        return res.status(200).json(responseTickets)
+    return res.status(400).json(responseTickets)
+}
+export const AddEvidencia = async(req: Request, res: Response)=>{
+    const updateTicket: TicketAddEvidenciaDto = req.body
+    const responseTickets = await TicketService.AddEvidenciaTicket(updateTicket)
+    if(responseTickets)
+        return res.status(200).json(responseTickets)
+    return res.status(400).json(responseTickets)
+}
+export const UpdateState = async(req: Request, res: Response)=>{
+    const updateTicket: TicketUpdateStateDto = req.body
+    const responseTickets = await TicketService.ChangeStateTicket(updateTicket)
+    if(responseTickets)
+        return res.status(200).json(responseTickets)
+    return res.status(400).json(responseTickets)
 }

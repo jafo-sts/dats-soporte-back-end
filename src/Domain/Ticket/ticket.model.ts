@@ -1,6 +1,6 @@
 export interface TicketModel{
     descripcion: string,
-    status: Array<StatusModel>,
+    estado: Array<StatusModel>,
     evidencia: Array<EvidenciaModel>,
     comentarios: Array<ComentariosModel>,
     historial: Array<HistorialModel>,

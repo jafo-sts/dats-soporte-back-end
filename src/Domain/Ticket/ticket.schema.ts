@@ -29,7 +29,7 @@ const StatusSchema = new mongoose.Schema<StatusModel>({
 const TicketSchema = new mongoose.Schema<TicketModel>({
     isDelete: {type: Boolean, default: false},
     descripcion:{type: String, required: true},
-    status: [StatusSchema],
+    estado: [StatusSchema],
     evidencia: [EvidenciaSchema],
     comentarios: [ComentarioSchema],
     historial: [HistorialSchema],
