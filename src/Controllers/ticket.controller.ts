@@ -35,14 +35,22 @@ export const UpdateTicket = async(req: Request, res: Response)=>{
 }
 
 export const AddComment = async(req: Request, res: Response)=>{
-    const updateTicket: TicketAddCommentDto = req.body
+    let updateTicket: TicketAddCommentDto = req.body
+
+    const uuidSearch: string = String(req.params["identifier"]) ?? ""
+    updateTicket.id = uuidSearch
+    
     const responseTickets = await TicketService.AddComment(updateTicket)
     if(responseTickets)
         return res.status(200).json(responseTickets)
     return res.status(400).json(responseTickets)
 }
 export const AddEvidencia = async(req: Request, res: Response)=>{
-    const updateTicket: TicketAddEvidenciaDto = req.body
+    let updateTicket: TicketAddEvidenciaDto = req.body
+    
+    const uuidSearch: string = String(req.params["identifier"]) ?? ""
+    updateTicket.id = uuidSearch
+
     const responseTickets = await TicketService.AddEvidenciaTicket(updateTicket)
     if(responseTickets)
         return res.status(200).json(responseTickets)
@@ -50,6 +58,10 @@ export const AddEvidencia = async(req: Request, res: Response)=>{
 }
 export const UpdateState = async(req: Request, res: Response)=>{
     const updateTicket: TicketUpdateStateDto = req.body
+
+    const uuidSearch: string = String(req.params["identifier"]) ?? ""
+    updateTicket.id = uuidSearch
+
     const responseTickets = await TicketService.ChangeStateTicket(updateTicket)
     if(responseTickets)
         return res.status(200).json(responseTickets)

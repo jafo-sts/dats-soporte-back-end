@@ -45,6 +45,7 @@ export const UpdateTicket =  async (updateTicket: TicketUpdateDto)=>{
     const response = await TicketRepository.UpdateTicket(updateTicket)
     if(response)
         return {
+            id: response.id,
             message: "Ticket actualizado Correctamente",
             succeeded: true
         } as ServerResponseDto

@@ -50,7 +50,7 @@ export const postTickets = async (ticket: TicketDTO) => {
     if (responseConnect) {
       const responseAdd = new ticketSchema({
         descripcion: ticket.descripcion,
-        estados: [
+        estado: [
           { idusuario: "276c954cfb2d4b5681bd14cd6559cf9b", estado: "CRE", mensaje: "", fecha: DatesRepository.DateTimeNowUtc() }
         ],
         historial: [
